@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>list etudiant</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <header class="header">
+    <h2>Gestions des Etudiant</h2>
+    <nav>
+      <ul>
+        <li>
+          <a href="{% url 'acceuil' %}">Accueil</a>
+        </li>
+        <li>
+          <a href="{% url 'detail' %}">ecart_type</a>
+        </li>
+        <li>
+          <a href="{% url 'acceuil' %}">Ajouter un Etudiant</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+    {% block content %} {% endblock %}
+  </body>
+</html>
