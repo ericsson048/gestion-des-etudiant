@@ -1,7 +1,8 @@
 import statistics
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
-from app.models import Note, Etudiant
+from app.models import Note, Etudiant, Cours
 from django.http import HttpResponse
 from django.views import View
 import pandas as pd
@@ -34,13 +35,15 @@ def EcarType(request):
     etudiants = Etudiant.objects.all()
     selected_etudiant = None
     if request.method == 'POST':
-        selected_etudiant = Etudiant.objects.get(CodeEtudiant=request.POST['etudiant'])
+        selected_etudiant = Etudiant.objects.get(
+            CodeEtudiant=request.POST['etudiant'])
         notes = selected_etudiant.note_set.all().values_list('note', flat=True)
         if len(notes) > 1:
             selected_etudiant.ecart_type = statistics.stdev(notes)
         else:
             selected_etudiant.ecart_type = 0
     return render(request, 'detail.html', {'etudiants': etudiants, 'selected_etudiant': selected_etudiant})
+
 
 class ExporterExcelView(View):
     def get(self, request, *args, **kwargs):
@@ -67,3 +70,27 @@ class ExporterExcelView(View):
         df.to_excel(response, index=False)
 
         return response
+
+
+class EtudiantForm(CreateView):
+    model = Etudiant
+    fields = "__all__"
+    context_object_name = 'form'
+    template_name = 'etudiant.html'
+    success_url = reverse_lazy('acceuil')
+
+
+class CoursForm(CreateView):
+    model = Cours
+    fields = "__all__"
+    context_object_name = 'form'
+    template_name = 'cours.html'
+    success_url = reverse_lazy('acceuil')
+
+
+class NoteForm(CreateView):
+    model = Note
+    fields = "__all__"
+    context_object_name = 'form'
+    template_name = 'note.html'
+    success_url = reverse_lazy('acceuil')

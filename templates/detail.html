@@ -1,7 +1,7 @@
 {% extends 'base.html'%} {%block content%}
 <div class="ecart">
   <div class="type">
-    <form method="post">
+    <form method="post" class="form">
       {% csrf_token %}
       <select name="etudiant">
         {% for etudiant in etudiants %}

@@ -34,6 +34,7 @@ class UserProfilesManager(BaseUserManager):
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     Nom = models.CharField(max_length=100)
     Prenom = models.CharField(max_length=100)
+    Username =models.CharField(max_length=100)
     Email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -58,7 +59,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
 
 class Etudiant(models.Model):
-    CodeEtudiant = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    CodeEtudiant = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
     NomEtudiant = models.CharField(max_length=100)
     PrenomEtudiant = models.CharField(max_length=100)
     Matricule = models.CharField(max_length=255)
@@ -76,9 +78,9 @@ class Etudiant(models.Model):
         return str(self.PrenomEtudiant).capitalize()
 
 
-
 class Cours(models.Model):
-    CodeCours = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    CodeCours = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
     NomCours = models.CharField(max_length=255)
     Volume = models.IntegerField(blank=False)
 
@@ -87,18 +89,18 @@ class Cours(models.Model):
 
 
 class Note(models.Model):
-    CodeNote = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    CodeNote = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
     etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE)
-    createdOn=models.DateTimeField(auto_now=True)
+    createdOn = models.DateTimeField(auto_now=True)
     cours = models.ForeignKey(Cours, on_delete=models.CASCADE)
     note = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['etudiant', 'cours'], name='unique_etudiant_cours')
+            models.UniqueConstraint(
+                fields=['etudiant', 'cours'], name='unique_etudiant_cours')
         ]
-
-
 
     def __str__(self):
         return f"{self.etudiant.PrenomEtudiant} {self.etudiant.NomEtudiant} - {self.cours.NomCours}: {self.note}"
