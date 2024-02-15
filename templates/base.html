@@ -7,34 +7,47 @@
     <link rel="stylesheet" href="{% static 'style.css' %}" />
   </head>
   <header class="header">
+    <input type="checkbox" name id="btn" />
     <h2>Gestions des Etudiant</h2>
     <nav>
       <ul>
         <li>
-          <a href="{% url 'acceuil' %}">Accueil</a>
+          <a href="{% url 'app:acceuil' %}">Accueil</a>
         </li>
-          {% if request.user.is_authenticated %}
-          {% if request.user.is_professeur %}
+        {% if request.user.is_professeur %}
 
         <li>
-          <a href="{% url 'detail' %}">ecart type</a>
+          <a href="{% url 'app:detail' %}">ecart type</a>
         </li>
+
         <li>
-          <a href="{% url 'etudiant' %}">Ajouter un Etudiant</a>
+          <label for="btn">
+            <span class="btn">Ajouter</span>
+          </label>
         </li>
-        <li>
-          <a href="{% url 'cours' %}">Ajouter un cours</a>
-        </li>
-        <li>
-          <a href="{% url 'note' %}">Ajouter un note</a>
-        </li>
+
+        {% endif %} {% if request.user.is_authenticated %}
         <li>
           <a href="{% url 'account_logout' %}">Logout</a>
         </li>
         {% endif %}
-        {% endif %}
       </ul>
     </nav>
+    {% if request.user.is_professeur %}
+    <div class="ajouter">
+      <ul>
+        <li>
+          <a href="{% url 'app:etudiant' %}">Etudiant</a>
+        </li>
+        <li>
+          <a href="{% url 'app:cours' %}">cours</a>
+        </li>
+        <li>
+          <a href="{% url 'app:note' %}">note</a>
+        </li>
+      </ul>
+    </div>
+    {% endif %}
   </header>
   <body>
     {% block content %} {% endblock %}

@@ -2,6 +2,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 import uuid
 
+from slugify import slugify
+
+
 class UserProfilesManager(BaseUserManager):
     """Modele de gestion des profils utilisateur"""
 
@@ -100,6 +103,7 @@ class Cours(models.Model):
 class Note(models.Model):
     CodeNote = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE)
     createdOn = models.DateTimeField(auto_now=True)
     cours = models.ForeignKey(Cours, on_delete=models.CASCADE)
@@ -110,6 +114,13 @@ class Note(models.Model):
             models.UniqueConstraint(
                 fields=['etudiant', 'cours'], name='unique_etudiant_cours')
         ]
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.cours.NomCours)
+
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"{self.etudiant.PrenomEtudiant} {self.etudiant.NomEtudiant} - {self.cours.NomCours}: {self.note}"

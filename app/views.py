@@ -1,11 +1,9 @@
 import statistics
-
-import allauth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import  ListView, CreateView,UpdateView, DeleteView
 from app.models import Note, Etudiant, Cours
 from django.http import HttpResponse
 from django.views import View
@@ -79,7 +77,7 @@ class EtudiantForm(CreateView):
     fields = "__all__"
     context_object_name = 'form'
     template_name = 'etudiant.html'
-    success_url = reverse_lazy('acceuil')
+    success_url = reverse_lazy('app:acceuil')
     login_url = '/accounts/login'
     redirect_field_name = 'account_login'
 
@@ -89,7 +87,7 @@ class CoursForm(CreateView):
     fields = "__all__"
     context_object_name = 'form'
     template_name = 'cours.html'
-    success_url = reverse_lazy('acceuil')
+    success_url = reverse_lazy('app:acceuil')
     login_url = '/accounts/login'
     redirect_field_name = 'account_login'
 
@@ -99,6 +97,20 @@ class NoteForm(CreateView):
     fields = "__all__"
     context_object_name = 'form'
     template_name = 'note.html'
-    success_url = reverse_lazy('acceuil')
+    success_url = reverse_lazy('app:acceuil')
     login_url = '/accounts/login'
     redirect_field_name = 'account_login'
+
+class NoteUP(UpdateView):
+    model = Note
+    fields = "__all__"  # Specify the fields you want to display/edit in the form
+    template_name = 'noteu.html'  # Specify the template to render the form
+    success_url = "/"
+
+class NoteD(DeleteView):
+    model = Note
+    template_name = 'noted.html'
+    context_object_name = "note"
+    success_url = "/"
+
+

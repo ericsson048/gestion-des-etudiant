@@ -18,12 +18,17 @@
     <td>{{ i.etudiant.prenom }}</td>
     <td>{{ i.etudiant.Matricule }}</td>
     <td>{{i.cours}}</td>
-    <td>{{i.note}}</td>
+    <td>
+      {{i.note}} {% if request.user.is_professeur %}
+      <a href="{% url 'app:noteu' slug=i.slug  %}">modifie</a>
+      <a href="{% url 'app:noted' slug=i.slug  %}">supprime</a>
+      {% endif %}
+    </td>
     <td>{{i.createdOn}}</td>
   </tr>
   {% endfor %}
 </table>
-<button onclick="location.href='{% url 'exporter_excel' %}'">
+<button onclick="location.href='{% url 'app:exporter_excel' %}'">
   Exporter en Excel
 </button>
 
