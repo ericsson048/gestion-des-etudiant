@@ -1,21 +1,25 @@
 import statistics
+
+import allauth
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, CreateView
 from app.models import Note, Etudiant, Cours
 from django.http import HttpResponse
 from django.views import View
 import pandas as pd
-from .forms import EtudiantForm
-import numpy as np
-from django.db.models import Q, StdDev
+from django.db.models import Q
 
-
+@method_decorator(login_required, name='dispatch')
 class acceuil(ListView):
     model = Note
     context_object_name = 'form'
     template_name = 'index.html'
     paginate_by = 10
+    login_url = '/accounts/login'
+    redirect_field_name = 'account_login'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -29,8 +33,6 @@ class acceuil(ListView):
                 Q(etudiant__Matricule__icontains=q)
             )
         return queryset
-
-
 def EcarType(request):
     etudiants = Etudiant.objects.all()
     selected_etudiant = None
@@ -44,7 +46,7 @@ def EcarType(request):
             selected_etudiant.ecart_type = 0
     return render(request, 'detail.html', {'etudiants': etudiants, 'selected_etudiant': selected_etudiant})
 
-
+@method_decorator(login_required, name='dispatch')
 class ExporterExcelView(View):
     def get(self, request, *args, **kwargs):
         # Récupérer les données de la base de données
@@ -71,21 +73,25 @@ class ExporterExcelView(View):
 
         return response
 
-
+@method_decorator(login_required, name='dispatch')
 class EtudiantForm(CreateView):
     model = Etudiant
     fields = "__all__"
     context_object_name = 'form'
     template_name = 'etudiant.html'
     success_url = reverse_lazy('acceuil')
+    login_url = '/accounts/login'
+    redirect_field_name = 'account_login'
 
-
+@method_decorator(login_required, name='dispatch')
 class CoursForm(CreateView):
     model = Cours
     fields = "__all__"
     context_object_name = 'form'
     template_name = 'cours.html'
     success_url = reverse_lazy('acceuil')
+    login_url = '/accounts/login'
+    redirect_field_name = 'account_login'
 
 
 class NoteForm(CreateView):
@@ -94,3 +100,5 @@ class NoteForm(CreateView):
     context_object_name = 'form'
     template_name = 'note.html'
     success_url = reverse_lazy('acceuil')
+    login_url = '/accounts/login'
+    redirect_field_name = 'account_login'

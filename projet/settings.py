@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -112,6 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_FORMS = {
+    "signup": "app.forms.SignupForm"
+}
+
+# ACCOUNT_ADAPTER = "app.adapter.CustomAccountAdapter"
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -126,8 +133,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'app/static/'
 STATIC_ROOT = BASE_DIR / 'static'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True

@@ -13,6 +13,9 @@
         <li>
           <a href="{% url 'acceuil' %}">Accueil</a>
         </li>
+          {% if request.user.is_authenticated %}
+          {% if request.user.is_professeur %}
+
         <li>
           <a href="{% url 'detail' %}">ecart type</a>
         </li>
@@ -26,8 +29,10 @@
           <a href="{% url 'note' %}">Ajouter un note</a>
         </li>
         <li>
-          <a href="{% url 'account_login' %}">Connection</a>
+          <a href="{% url 'account_logout' %}">Logout</a>
         </li>
+        {% endif %}
+        {% endif %}
       </ul>
     </nav>
   </header>
