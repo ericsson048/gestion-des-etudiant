@@ -20,7 +20,7 @@ table {
 }
 
 table th {
-  background-color: burlywood;
+  background-color: rgb(119, 235, 24);
 }
 table tr td a {
   color: blue;
@@ -67,7 +67,7 @@ body {
   color: #333;
 }
 .header {
-  background-color: burlywood;
+  background-color: rgba(136, 222, 61, 0.769);
   width: 100%;
   line-height: 20px;
   margin-bottom: 15px;
@@ -89,7 +89,7 @@ body button {
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px 0;
-  background-color: burlywood;
+  background-color: rgba(136, 222, 61, 0.769);
 }
 .header nav ul a {
   color: black;
@@ -144,7 +144,7 @@ body button {
   border: 1px solid gray;
   padding: 6px;
   border-radius: 10px;
-  background-color: burlywood;
+  background-color: rgb(125, 220, 139);
 }
 #btn {
   display: none;
@@ -159,18 +159,18 @@ body button {
   border-radius: 10px;
 }
 .search input:first-child {
-  border: 1px solid burlywood;
+  border: 1px solid gray;
 }
 .search input:first-child:focus {
   outline: none;
 }
 .search input:last-child {
-  border: 1px solid burlywood;
+  border: 1px solid gray;
   background-color: #fff;
 }
 .search input:last-child:hover {
   cursor: pointer;
-  background-color: burlywood;
+  background-color: rgb(125, 220, 139);
 }
 .ecart {
   font-size: 1rem;
@@ -185,7 +185,7 @@ body button {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: antiquewhite;
+  background-color: rgba(40, 236, 33, 0.84);
   gap: 5px;
   padding: 5px;
   border-radius: 10px;
@@ -194,7 +194,7 @@ body button {
   color: gray;
 }
 .type .form select {
-  border: 1px solid burlywood;
+  border: 1px solid gray;
   padding: 5px;
   border-radius: 10px;
 }
@@ -202,14 +202,14 @@ body button {
   outline: none;
 }
 .type input {
-  border: 1px solid burlywood;
+  border: 1px solid rgb(125, 220, 139);
   background-color: #fff;
   padding: 5px;
   border-radius: 10px;
 }
 .type input:hover {
   cursor: pointer;
-  background-color: burlywood;
+  background-color: rgb(125, 220, 139);
 }
 .x {
   display: flex;
@@ -221,7 +221,7 @@ body button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: antiquewhite;
+  background-color: rgba(73, 226, 116, 0.769);
   border-radius: 10px;
   gap: 10px;
   padding: 10px;
@@ -234,7 +234,7 @@ body button {
   margin: 10px 0;
 }
 .x .formE input {
-  border: 1px solid burlywood;
+  border: 1px solid gray;
   padding: 5px;
   border-radius: 10px;
 }
@@ -249,7 +249,7 @@ body button {
   color: gray;
 }
 .x .formE .flex select {
-  border: 1px solid burlywood;
+  border: 1px solid gray;
   padding: 5px;
   border-radius: 10px;
   width: 80%;
@@ -303,7 +303,7 @@ body button {
 }
 
 .x .formE p input {
-  border: 1px solid burlywood;
+  border: 1px solid gray;
   padding: 5px;
   border-radius: 10px;
 }

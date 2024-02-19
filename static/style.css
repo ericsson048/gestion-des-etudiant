@@ -12,20 +12,28 @@ th,
 td {
   border: 1px solid black;
   border-collapse: collapse;
-  padding: 10px;
+  padding: 10px 5px;
 }
 table {
   margin-top: 5px;
+  width: 100%;
 }
 
 table th {
   background-color: burlywood;
+}
+table tr td a {
+  color: blue;
+}
+table tr td a:last-child {
+  color: red;
 }
 body {
   display: flex;
   flex-direction: column;
   align-content: center;
   font-family: "Poppins", sans-serif;
+  width: 100%;
 }
 .pagination {
   display: flex;
@@ -77,6 +85,12 @@ body {
   align-items: center;
   gap: 10px;
 }
+body button {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px 0;
+  background-color: burlywood;
+}
 .header nav ul a {
   color: black;
   font-size: 1rem;
@@ -87,6 +101,59 @@ body {
 .header nav ul a:hover {
   background-color: antiquewhite;
 }
+.header nav ul span {
+  font-size: 1rem;
+  border: 1px solid gray;
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.header nav ul span:hover {
+  background-color: antiquewhite;
+}
+.ajouter {
+  background-color: rgba(235, 226, 213, 0.838);
+  width: 130px;
+  position: absolute;
+  top: 50px;
+  /* right: 10px; */
+  left: 85%;
+  border-radius: 10px;
+  padding: 20px;
+  transform: translateY(-300px);
+  transition: 300ms;
+}
+
+.ajouter ul {
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: column;
+  line-height: 5px;
+  padding: 5px;
+}
+.ajouter ul li {
+  margin-top: 5px;
+}
+.ajouter ul li a {
+  color: black;
+}
+.ajouter ul li a:hover {
+  font-size: 1rem;
+  border: 1px solid gray;
+  padding: 6px;
+  border-radius: 10px;
+  background-color: burlywood;
+}
+#btn {
+  display: none;
+}
+
+#btn:checked ~ .ajouter {
+  transform: translateY(0);
+}
+
 .search input {
   padding: 5px;
   border-radius: 10px;
@@ -164,11 +231,15 @@ body {
   flex-direction: column;
   align-items: start;
   gap: 5px;
+  margin: 10px 0;
 }
 .x .formE input {
   border: 1px solid burlywood;
   padding: 5px;
   border-radius: 10px;
+}
+.x .formE input:last-child {
+  width: 90%;
 }
 .x .formE .send {
   width: 80%;
@@ -216,4 +287,42 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 80%;
+}
+.x .formE div a {
+  color: #000;
+  margin: 13px 0;
+}
+.x .formE p {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.x .formE p input {
+  border: 1px solid burlywood;
+  padding: 5px;
+  border-radius: 10px;
+}
+.btn.btn-delete {
+  background-color: red;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.x .formE p span ul {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+  margin: 10px 0;
+}
+.x .formE p label {
+  width: 100%;
+  margin: 10px;
 }
