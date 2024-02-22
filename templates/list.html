@@ -14,11 +14,11 @@
   </tr>
   {% for i in form %}
   <tr>
-    <td>{{ i.etudiant.nom }}</td>
+    <td>{{ i.etudiant.nom }}</td
     <td>{{ i.etudiant.prenom }}</td>
     <td>{{ i.etudiant.Matricule }}</td>
     <td>{{i.cours}}</td>
-    <td>
+    <td>>
       {{i.note}} {% if request.user.is_professeur %}
       <a href="{% url 'app:noteu' slug=i.slug  %}">modifie</a>
       <a href="{% url 'app:noted' slug=i.slug  %}">supprime</a>

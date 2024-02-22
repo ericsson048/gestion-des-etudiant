@@ -74,8 +74,10 @@ class Etudiant(models.Model):
         primary_key=True, default=uuid.uuid4, editable=False)
     NomEtudiant = models.CharField(max_length=100)
     PrenomEtudiant = models.CharField(max_length=100)
-    Matricule = models.CharField(max_length=255)
+    Matricule = models.CharField(max_length=255, unique=True)
     DateNaissance = models.DateTimeField(blank=False)
+
+
 
     def __str__(self):
         return self.NomEtudiant
@@ -92,8 +94,10 @@ class Etudiant(models.Model):
 class Cours(models.Model):
     CodeCours = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
-    NomCours = models.CharField(max_length=255)
+    NomCours = models.CharField(max_length=255,unique=True)
     Volume = models.IntegerField(blank=False)
+
+
 
     def __str__(self):
         return self.NomCours
@@ -102,7 +106,7 @@ class Cours(models.Model):
 class Note(models.Model):
     CodeNote = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
-    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE)
     createdOn = models.DateTimeField(auto_now=True)
     cours = models.ForeignKey(Cours, on_delete=models.CASCADE)
@@ -115,10 +119,18 @@ class Note(models.Model):
         ]
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.cours.NomCours)
-
-        super().save(*args, **kwargs)
+        # Génère un slug aléatoire à partir de etudiant et du cours
+        slug_str = "%s %s" % (self.etudiant.PrenomEtudiant, self.cours.NomCours)
+        slug_str = slug_str.replace(' ', '-').lower()
+        # Ajoute un suffixe numérique si le slug existe déjà
+        count = 1
+        slug = slug_str
+        while Note.objects.filter(slug=slug).exists():
+            slug = "%s-%d" % (slug_str, count)
+            count += 1
+        self.slug = slug
+        # Enregistre le modèle avec le slug généré
+        super(Note, self).save(*args, **kwargs)
 
 
     def __str__(self):
